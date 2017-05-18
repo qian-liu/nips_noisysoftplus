@@ -26,6 +26,18 @@
 \usepackage{graphicx}
 %\usepackage{subfigure}
 
+\newenvironment{mycell}[1]
+{
+  \begin{minipage}{#1}
+    \begin{center}
+      \vspace*{0.15cm}
+    }
+    {
+      \vspace*{0.1cm}
+    \end{center}
+  \end{minipage}
+}
+
 \title{Generalised Training of Spiking Neural Networks}
 
 % The \author macro works with any number of authors. There are two
@@ -451,22 +463,36 @@ However, the loss stabilised fastest, which means a possibly shorter training ti
 %	\label{Fig:loss_ns}
 %\end{figure}
 %	The trained networks were scaled to SNNs and compared on recognition rates, 93.34\%, 96.43\% and 97.03\% with a conversion loss of 4.76\%, 0.91\% and 0.74\%.
-
-\begin{figure}
-	\begin{minipage}[t]{0.48\linewidth}
-		\raggedleft
-		\includegraphics[width=2.6in]{pics_iconip/8.png}
-		\caption{Comparisons of Loss during training using Noisy Softplus, ReLU and Softplus activation functions. Bold lines show the average of three training trials, and the grey colour illustrates the range between the minimum and the maximum values of the trials. }
-		\label{Fig:loss_ns}
-	\end{minipage}%
-    \hspace{0.04\linewidth}
-	\begin{minipage}[t]{0.48\linewidth}
-		\raggedright
-		\includegraphics[width=2.6in]{pics_iconip/9-2.pdf}
-		\caption{Classification accuracy compared among trained weights of Noisy Softplus, ReLU, Softplus on DNN, SNN and fine-tuned SNN.}
-		\label{Fig:result_bar}
-	\end{minipage}
+\begin{figure}[tbh!]
+  \centering
+  \begin{subfigure}[t]{0.48\textwidth}
+    \includegraphics[width=\textwidth]{pics_iconip/8.png}
+    \caption{Comparisons of Loss during training using Noisy Softplus, ReLU and Softplus activation functions. Bold lines show the average of three training trials, and the grey colour illustrates the range between the minimum and the maximum values of the trials.}
+    \label{Fig:loss_ns}
+  \end{subfigure}~~~
+  \begin{subfigure}[t]{0.48\textwidth}
+    \includegraphics[width=\textwidth]{pics_iconip/9-2.pdf}
+    \caption{Classification accuracy of Noisy Softplus, ReLU, Softplus on original DNNs~(DNN\_Orig), Noisy Softplus tested DNN~(DNN\_NS), fine-tuned DNN tested on Noisy Softplus~(DNN+FT\_NS), SNN with original weights~(SNN\_Orig) and SNN with fine-tuned weights~(SNN+FT).}
+    \label{Fig:result_bar}
+  \end{subfigure}
+  \caption{Comparisons on training and testing of the ConvNet.}
+  \label{Fig:performance}
 \end{figure}
+%\begin{figure}
+%	\begin{minipage}[t]{0.48\linewidth}
+%		\raggedleft
+%		\includegraphics[width=2.6in]{pics_iconip/8.png}
+%		\caption{Comparisons of Loss during training using Noisy Softplus, ReLU and Softplus activation functions. Bold lines show the average of three training trials, and the grey colour illustrates the range between the minimum and the maximum values of the trials. }
+%		\label{Fig:loss_ns}
+%	\end{minipage}%
+%    \hspace{0.04\linewidth}
+%	\begin{minipage}[t]{0.48\linewidth}
+%		\raggedright
+%		\includegraphics[width=2.6in]{pics_iconip/9-2.pdf}
+%		\caption{Classification accuracy compared among trained weights of Noisy Softplus, ReLU, Softplus on DNN, SNN and fine-tuned SNN.}
+%		\label{Fig:result_bar}
+%	\end{minipage}
+%\end{figure}
 
 The recognition test took the whole testing dataset of MNIST which contains $10,000$ images.
 At first, all trained models were tested on the same artificial neurons as used for training in ANNs, and these experiments were called the `DNN' test since the network had a deep structure (6 layers).
@@ -553,23 +579,70 @@ The best classification accuracy achieved by an SNN was 98.85\%, a 0.20\% drop f
 It is useful to compare with existing SNN training methods in Table~\ref{tbl:compare} where we order them on the computation complexity (descending).   
 The generalised training method presented in this paper has a simple activation function, it requires no conversions of trained weights, which are well fitted to biologically-plausible LIF neurons, and has a single \emph{optional} extra trick of fine tuning. The combination of these features compose a method with exceptional performance and ease of use for training SNNs.
 
+\begin{table*}[thb!]
+  \caption{SNN training methods comparisons.}
+  \begin{center}
+    \bgroup
+    \def\arraystretch{1.4}
+    \begin{tabular}{l c c c c c c}
+      \begin{mycell}{1cm} Method \end{mycell} & 
+      \begin{mycell}{1.8cm} Computation\\Complexity \end{mycell} & 
+      \begin{mycell}{1.8cm}Activation\\Function\end{mycell} &
+      \begin{mycell}{1.8cm} Biologically-\\plausibility \end{mycell} &  
+      \begin{mycell}{1.8cm} Additional\\Processing \end{mycell} & 
+      \begin{mycell}{1.8cm} Classification\\Accuracy \end{mycell} 
+      \\
+      \hline
+      \begin{mycell}{1cm} \cite{Jug_etal_2012} \end{mycell} & 
+      \begin{mycell}{1.8cm} 1st \end{mycell} & 
+      \begin{mycell}{1.8cm}Siegert \end{mycell} &
+      \begin{mycell}{1.8cm} Yes \end{mycell} &  
+      \begin{mycell}{1.8cm} No \end{mycell} & 
+      \begin{mycell}{1.8cm} 94.94~\cite{Stromatias2015scalable} \end{mycell} 
+      \\
+      \begin{mycell}{1cm} \cite{hunsberger2015spiking} \end{mycell} & 
+      \begin{mycell}{1.8cm} 2nd \end{mycell} & 
+      \begin{mycell}{1.8cm} Soft LIF \end{mycell} &
+      \begin{mycell}{1.8cm} Yes \end{mycell} &  
+      \begin{mycell}{1.8cm} Noisy inputs\\ \&Activations \end{mycell} & 
+      \begin{mycell}{1.8cm} 98.37 \end{mycell}
+      \\
+      \begin{mycell}{1cm} \cite{diehl2015fast} \end{mycell} & 
+      \begin{mycell}{1.8cm} 3rd \end{mycell} & 
+      \begin{mycell}{1.8cm} ReLU \end{mycell} &
+      \begin{mycell}{1.8cm} No \end{mycell} &  
+      \begin{mycell}{1.8cm} Dropout \&\\Conversion \end{mycell} & 
+      \begin{mycell}{1.8cm} 99.1\% \end{mycell} 
+      \\
+      \begin{mycell}{1cm} This\\Paper \end{mycell} & 
+      \begin{mycell}{1.8cm} 3rd \end{mycell} & 
+      \begin{mycell}{1.8cm} ReLU-like\end{mycell} &
+      \begin{mycell}{1.8cm} Yes \end{mycell} &  
+      \begin{mycell}{1.8cm} No \end{mycell} & 
+      \begin{mycell}{1.8cm} 98.89\% \end{mycell}  
+      % contents!
+    \end{tabular}
+    \egroup
+  \end{center}
+  \label{tbl:compare}
+\end{table*}
 
-\begin{table}[thb]
-	\centering
-	\caption{\label{tbl:compare}SNN training methods comparisons.}
-	\bgroup
-	\def\arraystretch{1.4}
-	\begin{tabular}{c c c c c c c}
-		%\hline
-		complexity & activation function & conversion & biologically-plausible  & extra tricks \\
-		\hline
-	 	1~\cite{Jug_etal_2012} & Siegert & No & Yes & No \\
-	 	2~\cite{hunsberger2015spiking} & Soft LIF & No & Yes & Noisy input \& AF\\
-	 	3~\cite{diehl2015fast} & ReLU & Normalisation & No & Dropout \\
-	 	4 This Paper & PAF-ReLU & No & Yes & No 
-	\end{tabular}
-	\egroup
-\end{table}
+%\begin{table}[thb]
+%	\centering
+%	\caption{\label{tbl:compare}SNN training methods comparisons.}
+%	\bgroup
+%	\def\arraystretch{1.4}
+%	\begin{tabular}{c c c c c c c}
+%		%\hline
+%		complexity & activation function & conversion & biologically-plausible  & extra tricks \\
+%		\hline
+%	 	1~\cite{Jug_etal_2012} & Siegert & No & Yes & No \\
+%	 	2~\cite{hunsberger2015spiking} & Soft LIF & No & Yes & Noisy input \& AF\\
+%	 	3~\cite{diehl2015fast} & ReLU & Normalisation & No & Dropout \\
+%	 	4 This Paper & PAF-ReLU & No & Yes & No 
+%	\end{tabular}
+%	\egroup
+%\end{table}
 
 %The network structure was the same with the state-of-the-art model which reported the best classification accuracy of 99.1\%~\cite{diehl2015fast} in ANN-trained SNNs: 12c5-2s-64c5-2s-10fc.
 %Their nearly loss-less conversion from ANNs to SNNs was achieved by using IF neurons, while our network performs the best among SNNs consisted of LIF neurons to our knowledge.
