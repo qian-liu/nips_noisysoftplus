@@ -28,14 +28,14 @@
 
 \newenvironment{mycell}[1]
 {
-  \begin{minipage}{#1}
-    \begin{center}
-      \vspace*{0.15cm}
-    }
-    {
-      \vspace*{0.1cm}
-    \end{center}
-  \end{minipage}
+	\begin{minipage}{#1}
+		\begin{center}
+			\vspace*{0.15cm}
+		}
+		{
+			\vspace*{0.1cm}
+		\end{center}
+	\end{minipage}
 }
 
 \title{Generalised Training of Spiking Neural Networks}
@@ -485,7 +485,7 @@ However, the loss stabilised fastest, which means a possibly shorter training ti
 %		\caption{Comparisons of Loss during training using Noisy Softplus, ReLU and Softplus activation functions. Bold lines show the average of three training trials, and the grey colour illustrates the range between the minimum and the maximum values of the trials. }
 %		\label{Fig:loss_ns}
 %	\end{minipage}%
-%    \hspace{0.04\linewidth}
+%    \hspace{0.01\linewidth}
 %	\begin{minipage}[t]{0.48\linewidth}
 %		\raggedright
 %		\includegraphics[width=2.6in]{pics_iconip/9-2.pdf}
@@ -634,7 +634,7 @@ The generalised training method presented in this paper has a simple activation 
 %	\def\arraystretch{1.4}
 %	\begin{tabular}{c c c c c c c}
 %		%\hline
-%		complexity & activation function & conversion & biologically-plausible  & extra tricks \\
+%		Complexity & Activation\\function & conversion & biologically-plausible  & extra tricks \\
 %		\hline
 %	 	1~\cite{Jug_etal_2012} & Siegert & No & Yes & No \\
 %	 	2~\cite{hunsberger2015spiking} & Soft LIF & No & Yes & Noisy input \& AF\\
