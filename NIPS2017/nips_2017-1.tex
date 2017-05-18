@@ -128,7 +128,7 @@ These fundamental differences in input/output representation and neural computat
 
 \begin{figure}[tb!]
 	\centering
-	\begin{subfigure}[t]{0.28\textwidth}
+	\begin{subfigure}[t]{0.32\textwidth}
 		\includegraphics[width=\textwidth]{pics_iconip/neuron_ann.pdf}
 		%			\caption{Current sampled at $dt$=1~ms.}
 	\end{subfigure}~
@@ -585,40 +585,45 @@ The generalised training method presented in this paper has a simple activation 
   				\def\arraystretch{1.4}
   				\begin{tabular}{l c c c c c c}
   					\begin{mycell}{1cm} Method \end{mycell} & 
-  					\begin{mycell}{1.8cm} Computation\\Complexity \end{mycell} & 
+%  					\begin{mycell}{1.8cm} Computation\\Complexity \end{mycell} & 
   					\begin{mycell}{1.8cm}Activation\\Function\end{mycell} &
   					\begin{mycell}{1.8cm} Biologically-\\plausibility \end{mycell} &  
-  					\begin{mycell}{1.8cm} Additional\\Processing \end{mycell} & 
-  					\begin{mycell}{1.8cm} Classification\\Accuracy \end{mycell} 
+  					\begin{mycell}{1.8cm} Additional\\Processing \end{mycell} &
+  					\begin{mycell}{1.8cm} Conversion \end{mycell} & 
+  					\begin{mycell}{1.8cm} Classification\\Accuracy(\%) \end{mycell} 
   					\\
   					\hline
   					\begin{mycell}{1cm} \cite{Jug_etal_2012} \end{mycell} & 
-  					\begin{mycell}{1.8cm} 1st \end{mycell} & 
+%  					\begin{mycell}{1.8cm} 1st \end{mycell} & 
   					\begin{mycell}{1.8cm}Siegert \end{mycell} &
-  					\begin{mycell}{1.8cm} Yes \end{mycell} &  
-  					\begin{mycell}{1.8cm} No \end{mycell} & 
+  					\begin{mycell}{1.8cm} \textbf{Yes} \end{mycell} &  
+  					\begin{mycell}{1.8cm} \textbf{No} \end{mycell} & 
+  					\begin{mycell}{1.8cm} \textbf{No} \end{mycell} & 
   					\begin{mycell}{1.8cm} 94.94~\cite{Stromatias2015scalable} \end{mycell} 
   					\\
   					\begin{mycell}{1cm} \cite{hunsberger2015spiking} \end{mycell} & 
-  					\begin{mycell}{1.8cm} 2nd \end{mycell} & 
+%  					\begin{mycell}{1.8cm} 2nd \end{mycell} & 
   					\begin{mycell}{1.8cm} Soft LIF \end{mycell} &
-  					\begin{mycell}{1.8cm} Yes \end{mycell} &  
+  					\begin{mycell}{1.8cm} \textbf{Yes} \end{mycell} &  
   					\begin{mycell}{1.8cm} Noisy inputs\\ \&Activations \end{mycell} & 
+  					\begin{mycell}{1.8cm} \textbf{No} \end{mycell} & 
   					\begin{mycell}{1.8cm} 98.37 \end{mycell}
   					\\
   					\begin{mycell}{1cm} \cite{diehl2015fast} \end{mycell} & 
-  					\begin{mycell}{1.8cm} 3rd \end{mycell} & 
-  					\begin{mycell}{1.8cm} ReLU \end{mycell} &
+%  					\begin{mycell}{1.8cm} 3rd \end{mycell} & 
+  					\begin{mycell}{1.8cm} \textbf{ReLU} \end{mycell} &
   					\begin{mycell}{1.8cm} No \end{mycell} &  
-  					\begin{mycell}{1.8cm} Dropout \&\\Conversion \end{mycell} & 
-  					\begin{mycell}{1.8cm} 99.1\% \end{mycell} 
+  					\begin{mycell}{1.8cm} Dropout  \end{mycell} & %\&\\Conversion
+  					\begin{mycell}{1.8cm} Yes \end{mycell} &  
+  					\begin{mycell}{1.8cm} \textbf{99.1\%} \end{mycell} 
   					\\
   					\begin{mycell}{1cm} This\\Paper \end{mycell} & 
-  					\begin{mycell}{1.8cm} 3rd \end{mycell} & 
-  					\begin{mycell}{1.8cm} ReLU-like\end{mycell} &
-  					\begin{mycell}{1.8cm} Yes \end{mycell} &  
-  					\begin{mycell}{1.8cm} No \end{mycell} & 
-  					\begin{mycell}{1.8cm} 98.89\% \end{mycell}  
+%  					\begin{mycell}{1.8cm} 3rd \end{mycell} & 
+  					\begin{mycell}{1.8cm} \textbf{PAF}\\($p\times$ReLU)\end{mycell} &
+  					\begin{mycell}{1.8cm} \textbf{Yes} \end{mycell} &  
+  					\begin{mycell}{1.8cm} \textbf{No} \\or fine tune  \end{mycell} & 
+  					\begin{mycell}{1.8cm} \textbf{No} \end{mycell} & 
+  					\begin{mycell}{2.4cm} 98.70\\ 98.85(fine tune) \end{mycell}  
   					% contents!
 			\end{tabular}
 			\egroup
