@@ -173,8 +173,8 @@ However, in this paper we aim to address the problem of mapping activation funct
 
 %Therefore, in the previous work of Qian Liu et al.~\cite{liu2016noisy}, the difference between analytical estimation and practical simulations of spiking neurons were compared, and a new activation function named Noisy Softplus was proposed to match the response function of LIF neurons. In order to close the gap between the performance of SNNs and ANNs, and to further improve the performance of SNNs, we extended Noisy Softplus with a scale factor and proposed a complete layered up SNN training method by using artificial neurons of combined activation.
 
-This paper will start with a brief review on modelling the LIF response function with Noisy Softplus in Section~\ref{sec:back}, and introduce the PAF in Section~\ref{sec:meth} to address the second problem mentioned above and complete the generalised SNN training method.
-In Section~\ref{sec:result} we will demonstrate the training of a spiking ConvNet, and compare the proposed method to existing training algorithms.
+We present an SNN training methodology via direct weight transfer from PAF-trained ANNs. Our method is compatible with existing ANN training methods, for changing abstract activation functions to their PAF version merely requires a linear scaling. The scale factor can be easily acquired by well-known and widely-available estimation techniques (e.g. curve fitting) from simple SNN simulations. Furthermore, once an LIF neuron is characterized, the scaling parameter can be used for any SNN which uses  LIF neurons with the same attributes. Training compatibility allows us to choose computationally simple activation functions to increase training speed. Surprisingly, the use of PAF-ReLU provides the best accuracy scores for an SNN on the MNIST dataset.
+This paper will start with a brief review on modelling the LIF response function with Noisy Softplus in Section~\ref{sec:back}, and introduce the PAF in Section~\ref{sec:meth} to address the second problem mentioned above and complete the generalised SNN training method. In Section~\ref{sec:result} we will demonstrate the training of a spiking ConvNet, and compare the proposed method to existing training algorithms.
 
 \section{Background}
 \label{sec:back}
@@ -349,15 +349,13 @@ Note that the calculation of noise level is not necessary for other activation f
 \subsection{Generalised SNN Training}
 \label{subsec:ns_train}
 Most excitingly, SNN training can be simplified to: calibrate the parameters $k$ and $S$ for Noisy Softplus which models response firing rates of LIF neurons, and use $S$ and $\tau_{syn}$ for PAF-ReLU as the activation function when training.
-Note that, $(k, S)$ are dependent on the biological configurations of an LIF neuron, but independent from the core activation functions used in PAF.
-%Thus, once the parameters are tuned for a certain LIF configuration, they can be used for trainings with various activation functions.
+Parameters $k$ and $S$ depend only on the characterization of an LIF neuron, thus, once they are tuned for a certain LIF configuration, they can be used for various activation functions and different network configurations.
 
-
-This generalised SNN training allows the use of widely-used activation functions in ANNs which are of low computational complexity and their corresponding derivative functions can be directly used for back propagation.
-In particular using ReLU  should improve the training performance of SNNs, since its, to the best of our knowledge, the simplest and most effective activation function.
+A small modification is required to use standard activation functions for ANNs, the change is a linear scaling which can be embedded in usual ANN parameters such as the learning rate. %which may be of low computational complexity and their corresponding derivative functions can be directly used for back propagation.
+In particular using PAF-ReLU improves training performance of SNNs, since its, to the best of our knowledge, the simplest and most effective activation function.
 Ideally, the method can be applied for any feed-forward network using ReLU-like activation functions, including deep architectures.
-Most significantly, the ANN-trained weights are ready-to-use (i.e. no extra conversion is required) and can be directly transferred to SNNs. The output firing rate of a spiking neuron can be obtained in the ANN simulation and then used to estimate the power usage of the networks in Neuromorphic systems (hardware SNN simulators).
 
+Most significantly, the ANN-trained weights are ready-to-use (i.e. no extra conversion is required) and can be directly transferred to SNNs. An added benefit of PAF is that the output firing rate of a spiking neurons can be obtained in the ANN simulation. These rates can then used to estimate the power usage or communication requirements for the networks in Neuromorphic systems (hardware SNN simulators; e.g. SpiNNaker, TrueNorth, NeuroGrid, BrainScales~\cite{liu2016bench}).
 
 
 \subsection{Fine Tuning}
@@ -366,7 +364,7 @@ Consequently, we can train the network with any activation function and then fin
 
 
 
-For the fine tuning procedure we present the whole dataset once, though this time we add a small number, for example 0.01, to all the binary values of the data labels.
+For the fine tuning procedure we present the full training data once, though this time we add a small number, for example 0.01, to all the binary values of the data labels.
 Doing so helps the training to relax the strict objective function to predict exact labels with binary values and it models noise activity in the last layer.
 An alternative method is to use the Softmax function at the top layer, which aims to map real vectors to the range $(0,1)$ which add up to 1. 
 However, without a limit on the input of Softmax, it will be easy to reach or even exceed the highest firing rate of a spiking neuron.
