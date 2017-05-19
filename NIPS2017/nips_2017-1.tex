@@ -98,6 +98,7 @@
 		The trained weights can be transferred directly in the spiking version of the same network without any conversion.
 		In addition, we propose a fine tuning method as an option which helps the trained network to match the SNN more closely.
 		Based on this generalised training method, we achieve the best SNN accuracy on the MNIST task using LIF neurons, 98.85\%, on a 6-layer spiking convolutional neural network~(ConvNet).
+		Our main contributions are: a method to produce a simple modification for activation functions so that ANN-trained weights can be directly transferred to SNNs; and a fine tuning procedure for the weights so they better fit SNN response which results in an increase of recognition accuracy.
 		
 		
 		
@@ -683,6 +684,7 @@
 	
 	In terms of classification/recognition accuracy, the performance of ANN-trained SNNs is nearly equivalent to ANNs, and the performance loss can be partially solved by fine tuning.
 	The best classification accuracy of 98.85\% using LIF neurons in a PyNN simulation outperforms state-of-the-art SNN models of LIF neurons and is very close to the result using IF neurons~\cite{diehl2015fast}.
+	An important feature of accurately modelling LIF neurons in ANNs is the acquisition of spiking neuron firing rates. These will aid deployment of SNNs in neuromorphic hardware by providing power and communication estimates, which would allow better usage or customization of the platforms.
 	
 	The current limitation prohibiting this off-line SNN training method from wide use lies in the lack of supporting tools, which would enable SNN training on popular deep learning platforms. Additionally an automation tool to read platform-dependent trained weights into the PyNN~\cite{davison2008pynn} language.
 	Another issue is the parameter calibration on the scaling factor of the PAF, thus numerical analysis is considered for future work to express the factors with biological parameters of a LIF neuron.
