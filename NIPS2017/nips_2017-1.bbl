@@ -69,6 +69,14 @@ Qian Liu, Evangelos Pineda-Garc\'ia\, Garibaldia nd~Stromatias, Teresa
 \newblock {\em Frontiers in Neuroscience}, 10:496, 2016.
   http://journal.frontiersin.org/article/10.3389/fnins.2016.00496.
 
+\bibitem{Stromatias2015scalable}
+Evangelos Stromatias, Daniel Neil, Francesco Galluppi, Michael Pfeiffer,
+  Shih-Chii Liu, and Steve Furber.
+\newblock {Scalable energy-efficient, low-latency implementations of trained
+  spiking deep belief networks on SpiNNaker}.
+\newblock In {\em Neural Networks (IJCNN), 2015 International Joint Conference
+  on}, pages 1--8. IEEE, 2015.
+
 \bibitem{stromatias2013power}
 Evangelos Stromatias, Francesco Galluppi, Cameron Patterson, and Steve Furber.
 \newblock {Power analysis of large-scale, real-time neural networks on
